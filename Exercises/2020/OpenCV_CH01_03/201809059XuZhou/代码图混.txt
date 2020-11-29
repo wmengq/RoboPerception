@@ -1,0 +1,54 @@
+#include <opencv2/opencv.hpp>
+#include <vector>
+#include <opencv2/highgui/highgui.hpp>
+
+#define WINDOW_NAME "线性混合"
+
+using namespace cv;
+using namespace std;
+const int g_nMaxAlphaValue = 100;
+int g_nAlphaValueSlider;
+double g_dAlphaValue;
+double g_dBetaValue;
+
+Mat g_srcImage1;
+Mat g_srcImage2;
+Mat g_dstImage;
+
+
+
+void on_Trackbar(int, void*) {
+	//图一透明值
+	g_dAlphaValue = (double)g_nAlphaValueSlider / g_nMaxAlphaValue ;
+	//图二透明值
+	g_dBetaValue = (1.0 - g_dAlphaValue);
+	//组合
+	addWeighted(g_srcImage1, g_dAlphaValue, g_srcImage2, g_dBetaValue,0.0, g_dstImage);
+	//显示
+	imshow(WINDOW_NAME,g_dstImage);
+}
+int main() {
+	//读图路径要在软件的文件下且大小长宽一致
+	g_srcImage1 = imread("C:\\Users\\HUAT_IAE\\source\\repos\\Project1\\Project1\\timg.jpg");
+	g_srcImage2 = imread("C:\\Users\\HUAT_IAE\\source\\repos\\Project1\\Project1\\tim.jpg");
+	//异常报错
+	if (!g_srcImage1.data) {
+		printf("err\n");
+		return -1;
+	}
+	if (!g_srcImage2.data) {
+		printf("err\n");
+		return -1;
+	}
+	//透明度初始化
+	g_nAlphaValueSlider = 70;
+	//创建窗口
+	namedWindow(WINDOW_NAME,1);
+	//创建滑动条
+	char TrackbarName[50];
+	sprintf_s(TrackbarName,"toutt%d", g_nMaxAlphaValue);//输出到窗口，要用“_s”更安全
+	createTrackbar(TrackbarName,WINDOW_NAME,&g_nAlphaValueSlider,g_nMaxAlphaValue,on_Trackbar);//滑动条创建
+	on_Trackbar(g_nAlphaValueSlider,0);//回调函数
+	waitKey(0);
+	return 0;
+}
