@@ -9,15 +9,15 @@ $实验步骤$
 
 1. 输入指令安装系统镜像。
 
-![](./image/)
+![](./image/18.png)
 
 2. 安装python库。
 
-![](./image/)
+![](./image/19.png)
 
 3. 添加i2c到user用户组。
 
-![](./image/)
+![](./image/20.png)
 
 ## 创建catkin工作空间 ##
 
@@ -25,23 +25,23 @@ $实验步骤$
 
 1. 创建catkin工作空间保存ROS程序包。
 
-![](./image/)
+
 
 2. 关闭当前运行指令的终端，重新打开一个新的终端，确认ROS安装成功。
 
-![](./image/)
+
 
 ## 编译安装 jetson-inference ##
 
-![](./image/)
+![](./image/21.png)
 
 ## 编译安装 ros_deep_learning ##
 
-![](./image/)
+![](./image/22.png)
 
 ## 编译安装 jetbot_ros ##
 
-![](./image/)
+![](./image/23.png)
 
 ## 测试 jetbot ROS ##
 
@@ -53,12 +53,12 @@ $实验步骤$
 
    输出如下信息，ROS工作正常。
 
-![](./image/)
+![](./image/24.png)
 
 2. 重新开启一个终端，输入rosnode list可以查看jetbot_motors节点是否启动。
 3. 输入rostopic list可以查看jetbot_motor节点监听的话题。
 
-![](./image/)
+![](./image/27.png)
 
 4. 开启一个新的终端测试电机命令，运行如下测试命令：
    ```
@@ -82,7 +82,7 @@ $实验步骤$
    ```
    程序运行后通过键盘输入W、S、D、A四个按键控制jetbot前后左右移动。
 
-![](./image/)
+
 
 7. 使用游戏摇杆控制jetbot移动。
    将游戏手柄的USB接收器插到jetbot。
@@ -90,9 +90,7 @@ $实验步骤$
    ```
    ls /dev/input
    ```
-   显示如下：
 
-![](./image/)
 
 8. 输入命令测试设备是否正常工作：
 
@@ -101,17 +99,16 @@ sudo jstest /dev/input/js0
 ```
 结果如下：
 
-![](./image/)
 
-9. 使用摄像头实时监控。
+1. 使用摄像头实时监控。
     启动jetbot_camera节点，启动jetbot摄像头视频流。
     运行如下命令显示摄像头图像：
     ```
     rosrun rqt_image_view rqt_image_view
     ```
-显示如下窗口，选择话题为/jetbot_camera/raw
 
-![](./image/)
+
+![](./image/26.png)
 
 ## 代码及解析 ##
 
